@@ -265,6 +265,7 @@ const Home = (props: HomeProps) => {
     const [priceLabel, setPriceLabel] = useState<string>("SOL");
     const [whitelistPrice, setWhitelistPrice] = useState(0);
     const [whitelistEnabled, setWhitelistEnabled] = useState(false);
+    const [isBurnToken, setIsBurnToken] = useState(false);
     const [whitelistTokenBalance, setWhitelistTokenBalance] = useState(0);
     const [isEnded, setIsEnded] = useState(false);
     const [endDate, setEndDate] = useState<Date>();
@@ -319,6 +320,7 @@ const Home = (props: HomeProps) => {
             // fetch whitelist token balance
             if (cndy.state.whitelistMintSettings) {
                 setWhitelistEnabled(true);
+                setIsBurnToken(cndy.state.whitelistMintSettings.mode.burnEveryTime);
                 setIsPresale(cndy.state.whitelistMintSettings.presale);
                 setIsWLOnly(!isPresale && cndy.state.whitelistMintSettings.discountPrice === null);
 
@@ -414,7 +416,7 @@ const Home = (props: HomeProps) => {
         let remaining = itemsRemaining - 1;
         setItemsRemaining(remaining);
         setIsSoldOut(remaining === 0);
-        if (whitelistTokenBalance && whitelistTokenBalance > 0) {
+        if (isBurnToken && whitelistTokenBalance && whitelistTokenBalance > 0) {
             let balance = whitelistTokenBalance - 1;
             setWhitelistTokenBalance(balance);
             setIsActive(isPresale && !isEnded && balance > 0);
@@ -557,8 +559,11 @@ const Home = (props: HomeProps) => {
                                 src="cool-cats.gif"
                                 alt="NFT To Mint"/></div>
                             <br/>
-                            {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) &&
+                            {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && isBurnToken &&
                               <h3>You own {whitelistTokenBalance} WL mint {whitelistTokenBalance > 1 ? "tokens" : "token" }.</h3>}
+                            {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && !isBurnToken &&
+                              <h3>You are whitelisted and allowed to mint.</h3>}
+
                             {wallet && isActive && endDate && Date.now() < endDate.getTime() &&
                               <Countdown
                                 date={toDate(candyMachine?.state?.endSettings?.number)}
