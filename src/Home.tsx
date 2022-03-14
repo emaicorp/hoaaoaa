@@ -78,9 +78,15 @@ const NFT = styled(Paper)`
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
 `;
 
+const Des = styled(NFT)`
+  text-align: left;
+  padding-top: 0px;
+`;
+
+
 const Card = styled(Paper)`
   display: inline-block;
-  background-color: var(--countdown-background-color) !important;
+  background-color: var(card-background-lighter-color) !important;
   margin: 5px;
   min-width: 40px;
   padding: 24px;
@@ -243,6 +249,21 @@ const ShimmerTitle = styled.h1`
     }
   }
 `;
+
+const GoldTitle = styled.h2`
+  color: var(--title-text-color);
+`;
+
+const LogoAligner = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 35px;
+    margin-right: 10px;
+  }
+`;
+
 
 export interface HomeProps {
     candyMachineId: anchor.web3.PublicKey;
@@ -547,8 +568,6 @@ const Home = (props: HomeProps) => {
                 </WalletContainer>
                 <ShimmerTitle>MINT IS LIVE !</ShimmerTitle>
                 <br/>
-
-
                 <MintContainer>
                     <DesContainer>
                         <NFT elevation={3}>
@@ -637,6 +656,35 @@ const Home = (props: HomeProps) => {
                             {wallet && isActive && solanaExplorerLink &&
                               <SolExplorerLink href={solanaExplorerLink} target="_blank">View on Solscan</SolExplorerLink>}
                         </NFT>
+                    </DesContainer>
+                    <DesContainer>
+                        <Des elevation={2}>
+                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 1</GoldTitle></LogoAligner>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </Des>
+                        <Des elevation={2}>
+                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 2</GoldTitle></LogoAligner>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </Des>
+                        <Des elevation={2}>
+                            <LogoAligner><img src="logo.png" alt=""></img><GoldTitle>TITLE 3</GoldTitle></LogoAligner>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt.</p>
+                        </Des>
                     </DesContainer>
                 </MintContainer>
             </MainContainer>
