@@ -13,7 +13,7 @@ All Candy Machine V2 functionalities are implemented, auto detected and maintain
 - end date / end number (endSettings)
 - spl-token to mint
 
-![Candy Machine Preview Image](https://i.imgur.com/WWSvkBO.png)
+![Candy Machine Preview Image](https://i.ibb.co/h7L0M3G/repo-bg.png)
 
 ### Supported Wallets
 
