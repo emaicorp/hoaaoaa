@@ -291,7 +291,7 @@ import {
   export const sendTransactionWithRetry = async (
     connection: Connection,
     wallet: any,
-    instructions: TransactionInstruction[],
+    instructions: Transaction | TransactionInstruction[],
     signers: Keypair[],
     commitment: Commitment = 'singleGossip',
     includesFeePayer: boolean = false,
@@ -301,7 +301,12 @@ import {
     if (!wallet.publicKey) throw new WalletNotConnectedError();
   
     let transaction = new Transaction();
-    instructions.forEach(instruction => transaction.add(instruction));
+    if (!Array.isArray(instructions)) {
+      transaction = instructions;
+    } else {
+      instructions.forEach(instruction => transaction.add(instruction));
+    }
+    
     transaction.recentBlockhash = (
       block || (await connection.getRecentBlockhash(commitment))
     ).blockhash;

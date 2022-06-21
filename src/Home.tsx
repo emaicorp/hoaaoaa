@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import styled from "styled-components";
 import confetti from "canvas-confetti";
 import * as anchor from "@project-serum/anchor";
-import {LAMPORTS_PER_SOL, PublicKey} from "@solana/web3.js";
+import {LAMPORTS_PER_SOL, PublicKey, Transaction} from "@solana/web3.js";
 import {useAnchorWallet} from "@solana/wallet-adapter-react";
 import {WalletMultiButton} from "@solana/wallet-adapter-react-ui";
 import {GatewayProvider} from '@civic/solana-gateway-react';
@@ -18,6 +18,7 @@ import {
     mintOneToken,
     CANDY_MACHINE_PROGRAM,
 } from "./candy-machine";
+import { sendTransactionWithRetry } from "./connection";
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
@@ -629,6 +630,66 @@ const Home = (props: HomeProps) => {
                                                 clusterUrl={rpcUrl}
                                                 cluster={cluster}
                                                 options={{autoShowModal: false}}
+                                                handleTransaction={async (transaction: Transaction) => {
+                                                    setIsMinting(true);
+                                                    const userMustSign = transaction.signatures.find(sig =>
+                                                      sig.publicKey.equals(wallet.publicKey!),
+                                                    );
+                                                    if (userMustSign) {
+                                                      setAlertState({
+                                                        open: true,
+                                                        message: 'Please sign one-time Civic Pass issuance',
+                                                        severity: 'info',
+                                                      });
+                                                      try {
+                                                        transaction = await wallet.signTransaction!(
+                                                          transaction,
+                                                        );
+                                                      } catch (e) {
+                                                        setAlertState({
+                                                          open: true,
+                                                          message: 'User cancelled signing',
+                                                          severity: 'error',
+                                                        });
+                                                        // setTimeout(() => window.location.reload(), 2000);
+                                                        setIsMinting(false);
+                                                        throw e;
+                                                      }
+                                                    } else {
+                                                      setAlertState({
+                                                        open: true,
+                                                        message: 'Refreshing Civic Pass',
+                                                        severity: 'info',
+                                                      });
+                                                    }
+                                                    try {
+                                                      await sendTransactionWithRetry(
+                                                        props.connection,
+                                                        wallet,
+                                                        transaction,
+                                                        [],
+                                                        'confirmed',
+                                                      );
+                                                      setAlertState({
+                                                        open: true,
+                                                        message: 'Please sign minting',
+                                                        severity: 'info',
+                                                      });
+                                                    } catch (e) {
+                                                      setAlertState({
+                                                        open: true,
+                                                        message:
+                                                          'Solana dropped the transaction, please try again',
+                                                        severity: 'warning',
+                                                      });
+                                                      console.error(e);
+                                                      // setTimeout(() => window.location.reload(), 2000);
+                                                      setIsMinting(false);
+                                                      throw e;
+                                                    }
+                                                    await onMint();
+                                                  }}
+                                                  broadcastTransaction={false}
                                             >
                                                 <MintButton
                                                     candyMachine={candyMachine}
