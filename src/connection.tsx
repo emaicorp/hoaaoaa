@@ -300,33 +300,35 @@ import {
   ) => {
     if (!wallet.publicKey) throw new WalletNotConnectedError();
   
-    let transaction = new Transaction();
+    
+    let transaction: Transaction;
     if (!Array.isArray(instructions)) {
       transaction = instructions;
     } else {
+      transaction = new Transaction();
       instructions.forEach(instruction => transaction.add(instruction));
+      transaction.recentBlockhash = (
+        block || (await connection.getRecentBlockhash(commitment))
+      ).blockhash;
+
+      if (includesFeePayer) {
+        transaction.setSigners(...signers.map(s => s.publicKey));
+      } else {
+        transaction.setSigners(
+          // fee payed by the wallet owner
+          wallet.publicKey,
+          ...signers.map(s => s.publicKey),
+        );
+      }
+
+      if (signers.length > 0) {
+        transaction.partialSign(...signers);
+      }
+      if (!includesFeePayer) {
+        transaction = await wallet.signTransaction(transaction);
+      }
     }
-    
-    transaction.recentBlockhash = (
-      block || (await connection.getRecentBlockhash(commitment))
-    ).blockhash;
-  
-    if (includesFeePayer) {
-      transaction.setSigners(...signers.map(s => s.publicKey));
-    } else {
-      transaction.setSigners(
-        // fee payed by the wallet owner
-        wallet.publicKey,
-        ...signers.map(s => s.publicKey),
-      );
-    }
-  
-    if (signers.length > 0) {
-      transaction.partialSign(...signers);
-    }
-    if (!includesFeePayer) {
-      transaction = await wallet.signTransaction(transaction);
-    }
+
   
     if (beforeSend) {
       beforeSend();
@@ -537,8 +539,11 @@ import {
     });
   
     //@ts-ignore
-    if (connection._signatureSubscriptions[subId])
-      connection.removeSignatureListener(subId);
+  try {
+    connection.removeSignatureListener(subId);
+  } catch (e) {
+    // ignore
+  }
     done = true;
     console.log('Returning status', status);
     return status;
