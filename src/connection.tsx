@@ -298,58 +298,57 @@ export const sendTransaction = async (
 };
 
 export const sendTransactionWithRetry = async (
-    connection: Connection,
-    wallet: any,
-    instructions: Transaction | TransactionInstruction[],
-    signers: Keypair[],
-    commitment: Commitment = 'singleGossip',
-    includesFeePayer: boolean = false,
-    block?: BlockhashAndFeeCalculator,
-    beforeSend?: () => void,
-  ) => {
-    if (!wallet.publicKey) throw new WalletNotConnectedError();
-  
-    
-    let transaction: Transaction;
-    if (!Array.isArray(instructions)) {
-      transaction = instructions;
+  connection: Connection,
+  wallet: any,
+  instructions: Transaction | TransactionInstruction[],
+  signers: Keypair[],
+  commitment: Commitment = 'singleGossip',
+  includesFeePayer: boolean = false,
+  block?: BlockhashAndFeeCalculator,
+  beforeSend?: () => void,
+) => {
+  if (!wallet.publicKey) throw new WalletNotConnectedError();
+
+  let transaction: Transaction;
+  if (!Array.isArray(instructions)) {
+    transaction = instructions;
+  } else {
+    transaction = new Transaction();
+    instructions.forEach(instruction => transaction.add(instruction));
+    transaction.recentBlockhash = (
+      block || (await connection.getRecentBlockhash(commitment))
+    ).blockhash;
+
+    if (includesFeePayer) {
+      transaction.setSigners(...signers.map(s => s.publicKey));
     } else {
-      transaction = new Transaction();
-      instructions.forEach(instruction => transaction.add(instruction));
-      transaction.recentBlockhash = (
-        block || (await connection.getRecentBlockhash(commitment))
-      ).blockhash;
-
-      if (includesFeePayer) {
-        transaction.setSigners(...signers.map(s => s.publicKey));
-      } else {
-        transaction.setSigners(
-          // fee payed by the wallet owner
-          wallet.publicKey,
-          ...signers.map(s => s.publicKey),
-        );
-      }
-
-      if (signers.length > 0) {
-        transaction.partialSign(...signers);
-      }
-      if (!includesFeePayer) {
-        transaction = await wallet.signTransaction(transaction);
-      }
+      transaction.setSigners(
+        // fee payed by the wallet owner
+        wallet.publicKey,
+        ...signers.map(s => s.publicKey),
+      );
     }
 
-  
-    if (beforeSend) {
-      beforeSend();
+    if (signers.length > 0) {
+      transaction.partialSign(...signers);
     }
-  
-    const { txid, slot } = await sendSignedTransaction({
-      connection,
-      signedTransaction: transaction,
-    });
-  
-    return { txid, slot };
-  };
+    if (!includesFeePayer) {
+      transaction = await wallet.signTransaction(transaction);
+    }
+  }
+
+
+  if (beforeSend) {
+    beforeSend();
+  }
+
+  const { txid, slot } = await sendSignedTransaction({
+    connection,
+    signedTransaction: transaction,
+  });
+
+  return { txid, slot };
+};
 
 export const getUnixTs = () => {
   return new Date().getTime() / 1000;
@@ -545,18 +544,19 @@ async function awaitTransactionSignatureConfirmation(
       await sleep(2000);
     }
   });
-  
-    //@ts-ignore
+
+  //@ts-ignore
   try {
     connection.removeSignatureListener(subId);
   } catch (e) {
     // ignore
   }
-    done = true;
-    console.log('Returning status', status);
-    return status;
-  }
-  export function sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  done = true;
+  console.log('Returning status', status);
+  return status;
+}
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
   

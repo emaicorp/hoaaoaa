@@ -82,6 +82,7 @@ const ConnectButton = styled(WalletMultiButton)`
 
 const NFT = styled(Paper)`
   min-width: 500px;
+  margin: 0 auto;
   padding: 5px 20px 20px 20px;
   flex: 1 1 auto;
   background-color: var(--card-background-color) !important;
@@ -90,7 +91,7 @@ const NFT = styled(Paper)`
 
 const Card = styled(Paper)`
   display: inline-block;
-  background-color: var(card-background-lighter-color) !important;
+  background-color: var(--countdown-background-color) !important;
   margin: 5px;
   min-width: 40px;
   padding: 24px;

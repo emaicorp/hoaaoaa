@@ -71,60 +71,55 @@ export const awaitTransactionSignatureConfirmation = async (
     connection: anchor.web3.Connection,
     queryStatus = false,
 ): Promise<anchor.web3.SignatureStatus | null | void> => {
-    let done = false;
-    let status: anchor.web3.SignatureStatus | null | void = {
-        slot: 0,
-        confirmations: 0,
-        err: null,
-    };
-    let subId = 0;
-    status = await new Promise(async (resolve, reject) => {
-        setTimeout(() => {
-            if (done) {
-                return;
-            }
-            done = true;
-            console.log('Rejecting for timeout...');
-            reject({ timeout: true });
-        }, timeout);
+  let done = false;
+  let status: anchor.web3.SignatureStatus | null | void = {
+      slot: 0,
+      confirmations: 0,
+      err: null,
+  };
+  let subId = 0;
+  status = await new Promise(async (resolve, reject) => {
+      setTimeout(() => {
+          if (done) {
+              return;
+          }
+          done = true;
+          console.log('Rejecting for timeout...');
+          reject({ timeout: true });
+      }, timeout);
 
-        while (!done && queryStatus) {
-            // eslint-disable-next-line no-loop-func
-            (async () => {
-                try {
-                    const signatureStatuses = await connection.getSignatureStatuses([
-                        txid,
-                    ]);
-                    status = signatureStatuses && signatureStatuses.value[0];
-                    if (!done) {
-                        if (!status) {
-                            console.log('REST null result for', txid, status);
-                        } else if (status.err) {
-                            console.log('REST error for', txid, status);
-                            done = true;
-                            reject(status.err);
-                        } else if (!status.confirmations) {
-                            console.log('REST no confirmations for', txid, status);
-                        } else {
-                            console.log('REST confirmation for', txid, status);
-                            done = true;
-                            resolve(status);
-                        }
-                    }
-                } catch (e) {
-                    if (!done) {
-                        console.log('REST connection error: txid', txid, e);
-                    }
-                }
-            })();
-            await sleep(2000);
-        }
-    });
-
-    //@ts-ignore
-    if (connection._signatureSubscriptions[subId]) {
-        connection.removeSignatureListener(subId);
-    }
+      while (!done && queryStatus) {
+          // eslint-disable-next-line no-loop-func
+          (async () => {
+              try {
+                  const signatureStatuses = await connection.getSignatureStatuses([
+                      txid,
+                  ]);
+                  status = signatureStatuses && signatureStatuses.value[0];
+                  if (!done) {
+                      if (!status) {
+                          console.log('REST null result for', txid, status);
+                      } else if (status.err) {
+                          console.log('REST error for', txid, status);
+                          done = true;
+                          reject(status.err);
+                      } else if (!status.confirmations) {
+                          console.log('REST no confirmations for', txid, status);
+                      } else {
+                          console.log('REST confirmation for', txid, status);
+                          done = true;
+                          resolve(status);
+                      }
+                  }
+              } catch (e) {
+                  if (!done) {
+                      console.log('REST connection error: txid', txid, e);
+                  }
+              }
+          })();
+          await sleep(2000);
+      }
+  });
 
   //@ts-ignore
   try {
