@@ -32,9 +32,10 @@ Vercel will automatically deploy new prod packages for each new commit.
 
 ## To thank me with a small SOL tip :]
 
-`58SevvhmaN4SfCop2HkepAWyM5zykr7Afiv91PAAfPqR`
+![Outfit Project Image](https://i.ibb.co/8sL24wB/artwork-4-small.png)
 
 My personnal project : https://twitter.com/theoutfitnft
+My SOL wallet : `58SevvhmaN4SfCop2HkepAWyM5zykr7Afiv91PAAfPqR`
 
 ## Getting Set Up
 
