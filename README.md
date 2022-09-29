@@ -34,6 +34,8 @@ Vercel will automatically deploy new prod packages for each new commit.
 
 `58SevvhmaN4SfCop2HkepAWyM5zykr7Afiv91PAAfPqR`
 
+My personnal project : https://twitter.com/theoutfitnft
+
 ## Getting Set Up
 
 ### Prerequisites
