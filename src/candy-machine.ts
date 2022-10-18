@@ -77,7 +77,6 @@ export const awaitTransactionSignatureConfirmation = async (
       confirmations: 0,
       err: null,
   };
-  let subId = 0;
   status = await new Promise(async (resolve, reject) => {
       setTimeout(() => {
           if (done) {
@@ -121,12 +120,6 @@ export const awaitTransactionSignatureConfirmation = async (
       }
   });
 
-  //@ts-ignore
-  try {
-    connection.removeSignatureListener(subId);
-  } catch (e) {
-    // ignore
-  }
   done = true;
   console.log('Returning status', status);
   return status;

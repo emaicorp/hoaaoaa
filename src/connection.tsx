@@ -238,7 +238,7 @@ export const sendTransaction = async (
   if (!wallet.publicKey) throw new WalletNotConnectedError();
 
   let transaction: Transaction;
-  if (instructions instanceof Transaction) {
+  if (!Array.isArray(instructions)) {
     transaction = instructions;
   } else {
     transaction = new Transaction();

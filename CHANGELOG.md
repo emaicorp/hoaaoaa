@@ -1,3 +1,12 @@
+**18 Oct 2022**
+
+Merge of last civic upgrades.
+Various code updates.
+
+**30 Jun 2022**
+
+Fixing "Minting failed." error message poping on successful mint.
+
 **31 May 2022**
 
 Updated UI to reflect latest Metaplex Collection updates

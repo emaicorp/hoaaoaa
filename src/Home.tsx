@@ -28,7 +28,6 @@ import {
     mintOneToken,
     SetupState,
 } from "./candy-machine";
-import { sendTransactionWithRetry } from "./connection";
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
