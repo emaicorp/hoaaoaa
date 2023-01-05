@@ -1,3 +1,5 @@
+== CANDY MACHINE V3 UPGRADE IN PROGRESS ==
+
 # Introduction
 
 **PROD-READY Candy Machine Responsive UI** which can be easily customized in 5mn.
