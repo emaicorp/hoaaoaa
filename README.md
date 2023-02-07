@@ -1,4 +1,4 @@
-FOR CANDY MACHINE V3, YOU CAN USE (Mine is V2 only) :
+**FOR CANDY MACHINE V3, YOU CAN USE (Mine is V2 only) :**
 
 https://github.com/zaabstudio/candy-machine-zaab-ui
 
