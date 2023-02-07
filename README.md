@@ -1,8 +1,10 @@
-**= CANDY MACHINE V3 UPGRADE IN PROGRESS =**
+FOR CANDY MACHINE V3, YOU CAN USE (Mine is V2 only) :
+
+https://github.com/zaabstudio/candy-machine-zaab-ui
 
 # Introduction
 
-**PROD-READY Candy Machine Responsive UI** which can be easily customized in 5mn.
+**PROD-READY Candy Machine V2 Responsive UI** which can be easily customized in 5mn.
 
 All Candy Machine V2 functionalities are implemented, auto detected and maintained up-to-date :
 
@@ -15,6 +17,8 @@ All Candy Machine V2 functionalities are implemented, auto detected and maintain
 - latest MCC updates from Metaplex
 
 ![Candy Machine Preview Image](https://i.ibb.co/yPrdrrF/cmv2.png)
+
+For V3 functionalities, I recommend you to use the repository https://github.com/zaabstudio/candy-machine-zaab-ui written by a friend.
 
 ### Supported Wallets
 
