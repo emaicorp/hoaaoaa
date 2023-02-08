@@ -1,6 +1,6 @@
 **FOR CANDY MACHINE V3, YOU CAN USE (Mine is V2 only) :**
 
-https://github.com/zaabstudio/candy-machine-zaab-ui
+https://github.com/wearekite/candy-machine-v3-ui
 
 # Introduction
 
@@ -18,7 +18,7 @@ All Candy Machine V2 functionalities are implemented, auto detected and maintain
 
 ![Candy Machine Preview Image](https://i.ibb.co/yPrdrrF/cmv2.png)
 
-For V3 functionalities, I recommend you to use the repository https://github.com/zaabstudio/candy-machine-zaab-ui written by a friend.
+For V3 functionalities, I recommend you to use the repository https://github.com/wearekite/candy-machine-v3-ui written by a friend.
 
 ### Supported Wallets
 
