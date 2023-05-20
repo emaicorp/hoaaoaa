@@ -680,7 +680,7 @@ const Home = (props: HomeProps) => {
                                 <Price
                                 label={isActive && whitelistEnabled && (whitelistTokenBalance > 0) ? (whitelistPrice + " " + priceLabel) : (price + " " + priceLabel)}/><Image
                                 src="background.jpeg"
-                                alt="NFT To Mint" style={{width:"80%", height:"450px"}}/></div>
+                                alt="NFT To Mint" className="homegif" /></div>
                             <br/>
                             {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && isBurnToken &&
                               <h3>You own {whitelistTokenBalance} WL
