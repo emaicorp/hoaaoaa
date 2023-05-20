@@ -1,7 +1,7 @@
 /* Customize your main colors in :root variables */
 :root {
   --main-background-color: #343A50;
-  --card-background-color: #804980;
+  --card-background-color:url("img/hoareveal.gif");
   --countdown-background-color: #433765;
   --main-text-color:#F7F6F4;
   --title-text-color:#3CBA8B;
@@ -9,8 +9,8 @@
 
 body{
 /*  background-color:var(--main-background-color);*/
-  background: url("img/background.png");
-  background-size: cover;
+
+  background-position: center center;
   font-family: 'Patrick Hand', cursive;
   font-size: 1.1em;
 }
@@ -18,11 +18,202 @@ body{
 
 h2, p{
   color: var(--main-text-color);
+  margin:0
 }
 
 h3{
 font-weight: normal;
 }
 
+/* Container */
+.container {
+  display: flex;
+}
+
+.animation-section {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10rem;
+  background: url("img/hoareveal.gif");
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  background-position: center center;
+
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
 
 
+
+
+.animation-content {
+  text-align: center;
+}
+
+.animation-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.animation-description {
+  font-size: 1.2rem;
+  color: #61b2ca;
+  margin-bottom: 2rem;
+}
+
+.animation-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.animation-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #3a2e0d, #4e0a21, #330d27,#105257, #1a0d3a,  #155817, #251a08, #11110e);
+  background-size: 200% 200%;
+  animation: gradient-animation 10s linear infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animation-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 4px;
+  background-color: #4E44CE;
+  animation: pulse 2s infinite;
+}
+
+.animation-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  animation: fade 2s infinite;
+}
+
+.animation-text span {
+  display: block;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Media Query */
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .animation-section {
+    display: none;
+  }
+
+  .mint-section {
+    flex: 1;
+  }
+}
+
+
+
+/* MintSection */
+.mint-section {
+  flex: 2;
+  padding: 2rem;
+    background: linear-gradient(45deg, #FFC107, #E91E63, #e766c1,#0d666d, #826abb,  #4CAF50, #FF9800, #11110e);
+  background-size: 200% 100%;
+  animation: gradient-animation 10s linear infinite;
+
+}
+
+.mint-title {
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+
+.mint-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.mint-form {
+  /* Add your mint form styles here */
+}
+
+.mint-button {
+  background-color: #4E44CE;
+  color: #fff;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.mint-button:hover {
+  background-color: #3a329c;
+}
+
+.mint-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

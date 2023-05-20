@@ -2,6 +2,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import confetti from "canvas-confetti";
 import * as anchor from "@project-serum/anchor";
+import { Card as ImportCard} from "./Card"
 import {
     Commitment,
     Connection,
@@ -18,6 +19,7 @@ import {Snackbar, Paper, LinearProgress, Chip} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import {AlertState, getAtaForMint, toDate} from './utils';
 import {MintButton} from './MintButton';
+
 import {
     awaitTransactionSignatureConfirmation,
     CANDY_MACHINE_PROGRAM,
@@ -28,6 +30,7 @@ import {
     mintOneToken,
     SetupState,
 } from "./candy-machine";
+import "./App.css"
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
@@ -80,7 +83,7 @@ const ConnectButton = styled(WalletMultiButton)`
 `;
 
 const NFT = styled(Paper)`
-  min-width: 500px;
+  min-width: 200px;
   margin: 0 auto;
   padding: 5px 20px 20px 20px;
   flex: 1 1 auto;
@@ -165,10 +168,12 @@ const DesContainer = styled.div`
   flex-direction: column;
   flex: 1 1 auto;
   gap: 20px;
+  min-width:100px
 `;
 
 const Price = styled(Chip)`
   position: absolute;
+  width:200px;
   margin: 5px;
   font-weight: bold;
   font-size: 1.2em !important;
@@ -469,7 +474,7 @@ const Home = (props: HomeProps) => {
         if (!payWithSplToken && balance && balance > 0) {
             setBalance(balance - ((whitelistEnabled ? whitelistPrice : price) * qty) - solFeesEstimation);
         }
-        setSolanaExplorerLink(cluster === "devnet" || cluster === "testnet"
+        setSolanaExplorerLink(cluster === "mainnet-beta" || cluster === "testnet"
             ? ("https://solscan.io/token/" + mintPublicKey + "?cluster=" + cluster)
             : ("https://solscan.io/token/" + mintPublicKey));
         setIsMinting(false);
@@ -637,7 +642,24 @@ const Home = (props: HomeProps) => {
 
 
     return (
-        <main>
+        <div className="container">
+        <div className="animation-section">
+        <div className="animation-content">
+          <h2 className="animation-title">Welcome to HOA Pre SALE NFT Mint </h2>
+          <p className="animation-description">Experience the magic of minting your own NFTs.</p>
+          <div className="animation-box">
+            <div className="animation-circle"></div>
+            <div className="animation-text">
+              <span>Mint Your</span>
+              <span>NFTs</span>
+              <span>NOW</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mint-section">
+      <h2 className="mint-title">House Of Anasah</h2>
+       
             <MainContainer>
                 <WalletContainer>
                     <Wallet>
@@ -647,15 +669,18 @@ const Home = (props: HomeProps) => {
                     </Wallet>
                 </WalletContainer>
                 <br/>
+                
                 <MintContainer>
                     <DesContainer>
-                        <NFT elevation={3}>
-                            <h2>My NFT</h2>
+                        <NFT elevation={3} style={{marginTop:"80px"}}>
+                            <h2>House Of Anasah</h2>
                             <br/>
-                            <div><Price
+                            <ImportCard/>
+                            <div>
+                                <Price
                                 label={isActive && whitelistEnabled && (whitelistTokenBalance > 0) ? (whitelistPrice + " " + priceLabel) : (price + " " + priceLabel)}/><Image
-                                src="cool-cats.gif"
-                                alt="NFT To Mint"/></div>
+                                src="background.jpeg"
+                                alt="NFT To Mint" style={{width:"80%", height:"450px"}}/></div>
                             <br/>
                             {wallet && isActive && whitelistEnabled && (whitelistTokenBalance > 0) && isBurnToken &&
                               <h3>You own {whitelistTokenBalance} WL
@@ -750,7 +775,9 @@ const Home = (props: HomeProps) => {
                     {alertState.message}
                 </Alert>
             </Snackbar>
-        </main>
+        
+        </div>
+        </div>
     );
 };
 
