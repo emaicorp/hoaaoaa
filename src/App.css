@@ -77,15 +77,26 @@ font-weight: normal;
 }
 .animation-circle {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 11%;
+  left: 10%;
   transform: translate(-50%, -50%);
   width: 160px;
   height: 160px;
   border-radius: 50%;
   background: linear-gradient(45deg, #3a2e0d, #4e0a21, #330d27,#105257, #1a0d3a,  #155817, #251a08, #11110e);
   background-size: 200% 200%;
-  animation: gradient-animation 10s linear infinite;
+  animation: gradient-animations 1s linear infinite;
+}
+
+@keyframes gradient-animations {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(0deg);
+  }
+  100% {
+    background-position: 100% 50%;
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes gradient-animation {
@@ -122,7 +133,7 @@ font-weight: normal;
   font-size: 1.2rem;
   font-weight: bold;
   color: #ffffff;
-  animation: fade 2s infinite;
+  animation: fade 4s infinite;
 }
 
 .animation-text span {
@@ -158,9 +169,7 @@ font-weight: normal;
 
 /* Media Query */
 @media (max-width: 1000px) {
-  .container {
-    flex-direction: column;
-  }
+
 
   .animation-section {
     display: none;
@@ -177,9 +186,9 @@ font-weight: normal;
 .mint-section {
   flex: 2;
   padding: 2rem;
-    background: linear-gradient(45deg, #FFC107, #E91E63, #e766c1,#0d666d, #826abb,  #4CAF50, #FF9800, #11110e);
+    background: linear-gradient(45deg, #c99a10, #E91E63, #8bbd17,#0d666d, #826abb,  #0ea112, #FF9800, #757575);
   background-size: 200% 100%;
-  animation: gradient-animation 10s linear infinite;
+  animation: gradient-animation 6s linear infinite;
 
 }
 
@@ -216,4 +225,10 @@ font-weight: normal;
 .mint-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.homegif {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }

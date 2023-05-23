@@ -147,7 +147,7 @@ const SolExplorerLink = styled.a`
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 20px;
   margin-right: 4%;
   margin-left: 4%;
@@ -181,8 +181,8 @@ const Price = styled(Chip)`
 `;
 
 const Image = styled.img`
-  height: 400px;
-  width: auto;
+  height: 100%;
+    width:90%;
   border-radius: 7px;
   box-shadow: 5px 5px 40px 5px rgba(0, 0, 0, 0.5);
 `;
@@ -672,7 +672,7 @@ const Home = (props: HomeProps) => {
                 
                 <MintContainer>
                     <DesContainer>
-                        <NFT elevation={3} style={{marginTop:"80px"}}>
+                        <NFT elevation={3} style={{marginTop:"20px"}}>
                             <h2>House Of Anasah</h2>
                             <br/>
                             <ImportCard/>
