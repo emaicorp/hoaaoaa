@@ -73,8 +73,8 @@ h3 {
 }
 .animation-circle {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 11%;
+  left: 10%;
   transform: translate(-50%, -50%);
   width: 160px;
   height: 160px;
@@ -91,7 +91,18 @@ h3 {
     #11110e
   );
   background-size: 200% 200%;
-  animation: gradient-animation 10s linear infinite;
+  animation: gradient-animations 1s linear infinite;
+}
+
+@keyframes gradient-animations {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(0deg);
+  }
+  100% {
+    background-position: 100% 50%;
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes gradient-animation {
@@ -128,7 +139,7 @@ h3 {
   font-size: 1.2rem;
   font-weight: bold;
   color: #ffffff;
-  animation: fade 2s infinite;
+  animation: fade 4s infinite;
 }
 
 .animation-text span {
@@ -164,9 +175,7 @@ h3 {
 
 /* Media Query */
 @media (max-width: 1000px) {
-  .container {
-    flex-direction: column;
-  }
+
 
   .animation-section {
     display: none;
@@ -180,6 +189,7 @@ h3 {
 /* MintSection */
 .mint-section {
   flex: 2;
+
   /*padding: 2rem;*/
 
   background: linear-gradient(
@@ -205,6 +215,12 @@ h3 {
   padding-top: 2rem;
   justify-content: space-between;
   box-shadow: 2px 1px 2px 2px rgba(17, 16, 16, 0.836);
+  padding: 2rem;
+    background: linear-gradient(45deg, #c99a10, #E91E63, #8bbd17,#0d666d, #826abb,  #0ea112, #FF9800, #757575);
+  background-size: 200% 100%;
+  animation: gradient-animation 6s linear infinite;
+
+
 }
 
 .mint-title {
@@ -240,3 +256,12 @@ h3 {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+
+
+.homegif {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+

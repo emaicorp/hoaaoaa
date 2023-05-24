@@ -169,7 +169,7 @@ const SolExplorerLink = styled.a`
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 20px;
   margin-right: 4%;
   margin-left: 4%;
@@ -739,22 +739,17 @@ const Home = (props: HomeProps) => {
         </div>
       </div>
       <div className="mint-section">
+
         <div className="mint-header">
           <h1 className="mint-title">House Of Anasah</h1>
-          <WalletContainer>
-            <Wallet>
-              {wallet ? (
-                <WalletAmount>
-                  {(balance || 0).toLocaleString()} SOL
-                  <ConnectButton />
-                </WalletAmount>
-              ) : (
-                <ConnectButton>Connect Wallet</ConnectButton>
-              )}
-            </Wallet>
+            <WalletContainer>
+                    <Wallet>
+                        {wallet ?
+                            <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
+                            <ConnectButton>Connect Wallet</ConnectButton>}
+                    </Wallet>
           </WalletContainer>
-        </div>
-
+      
         <MainContainer>
           <MintContainer>
             <DesContainer>
