@@ -1,28 +1,28 @@
 /* Customize your main colors in :root variables */
 :root {
-  --main-background-color: #343A50;
-  --card-background-color:url("img/hoareveal.gif");
+  --main-background-color: #343a50;
+  --card-background-color: url("img/hoareveal.gif");
   --countdown-background-color: #433765;
-  --main-text-color:#F7F6F4;
-  --title-text-color:#3CBA8B;
+  --main-text-color: #f7f6f4;
+  --title-text-color: #3cba8b;
 }
 
-body{
-/*  background-color:var(--main-background-color);*/
+body {
+  /*  background-color:var(--main-background-color);*/
 
   background-position: center center;
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   font-size: 1.1em;
 }
-	
 
-h2, p{
+h2,
+p {
   color: var(--main-text-color);
-  margin:0
+  margin: 0;
 }
 
-h3{
-font-weight: normal;
+h3 {
+  font-weight: normal;
 }
 
 /* Container */
@@ -36,10 +36,9 @@ font-weight: normal;
   justify-content: center;
   padding-top: 10rem;
   background: url("img/hoareveal.gif");
-  background-size: 100% 100%; 
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
-
 }
 @keyframes gradient-animation {
   0% {
@@ -49,9 +48,6 @@ font-weight: normal;
     background-position: 0 0;
   }
 }
-
-
-
 
 .animation-content {
   text-align: center;
@@ -83,7 +79,17 @@ font-weight: normal;
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #3a2e0d, #4e0a21, #330d27,#105257, #1a0d3a,  #155817, #251a08, #11110e);
+  background: linear-gradient(
+    45deg,
+    #3a2e0d,
+    #4e0a21,
+    #330d27,
+    #105257,
+    #1a0d3a,
+    #155817,
+    #251a08,
+    #11110e
+  );
   background-size: 200% 200%;
   animation: gradient-animation 10s linear infinite;
 }
@@ -106,7 +112,7 @@ font-weight: normal;
   transform: translate(-50%, -50%);
   width: 160px;
   height: 4px;
-  background-color: #4E44CE;
+  background-color: #4e44ce;
   animation: pulse 2s infinite;
 }
 
@@ -171,22 +177,29 @@ font-weight: normal;
   }
 }
 
-
-
 /* MintSection */
 .mint-section {
   flex: 2;
   padding: 2rem;
-    background: linear-gradient(45deg, #FFC107, #E91E63, #e766c1,#0d666d, #826abb,  #4CAF50, #FF9800, #11110e);
+  background: linear-gradient(
+    45deg,
+    #ffc107,
+    #e91e63,
+    #e766c1,
+    #0d666d,
+    #826abb,
+    #4caf50,
+    #ff9800,
+    #11110e
+  );
+
   background-size: 200% 100%;
   animation: gradient-animation 10s linear infinite;
-
 }
 
 .mint-title {
   font-size: 2rem;
   font-weight: bold;
-
 }
 
 .mint-description {
@@ -200,7 +213,7 @@ font-weight: normal;
 }
 
 .mint-button {
-  background-color: #4E44CE;
+  background-color: #4e44ce;
   color: #fff;
   padding: 1rem 2rem;
   border: none;
