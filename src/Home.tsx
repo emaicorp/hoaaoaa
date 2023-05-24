@@ -31,6 +31,7 @@ import {
   SetupState,
 } from "./candy-machine";
 import "./App.css";
+//import RoadMap from "./components/RoadMap";
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS
@@ -44,7 +45,6 @@ const WalletContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: right;
 `;
 
 const WalletAmount = styled.div`
@@ -74,6 +74,21 @@ const WalletAmount = styled.div`
   vertical-align: middle;
   justify-content: flex-start;
   gap: 10px;
+  margin-bottom: 30px;
+  background: linear-gradient(
+    45deg,
+    #ffc107,
+    #e91e63,
+    #e766c1,
+    #0d666d,
+    #826abb,
+    #4caf50,
+    #ff9800,
+    #11110e
+  );
+  background-size: 200% 100%;
+
+  animation: gradient-animation 10s linear infinite;
 `;
 
 const Wallet = styled.ul`
@@ -185,11 +200,25 @@ const Price = styled(Chip)`
   font-weight: bold;
   font-size: 1.2em !important;
   font-family: "Patrick Hand", cursive !important;
+  background: linear-gradient(
+    45deg,
+    #ffc107,
+    #e91e63,
+    #e766c1,
+    #0d666d,
+    #826abb,
+    #4caf50,
+    #ff9800,
+    #11110e
+  );
+  background-size: 200% 100%;
+
+  animation: gradient-animation 10s linear infinite;
 `;
 
 const Image = styled.img`
   height: 400px;
-  width: auto;
+  width: 100%;
   border-radius: 7px;
   box-shadow: 5px 5px 40px 5px rgba(0, 0, 0, 0.5);
 `;
@@ -710,9 +739,8 @@ const Home = (props: HomeProps) => {
         </div>
       </div>
       <div className="mint-section">
-        <h2 className="mint-title">House Of Anasah</h2>
-
-        <MainContainer>
+        <div className="mint-header">
+          <h1 className="mint-title">House Of Anasah</h1>
           <WalletContainer>
             <Wallet>
               {wallet ? (
@@ -725,13 +753,13 @@ const Home = (props: HomeProps) => {
               )}
             </Wallet>
           </WalletContainer>
-          <br />
+        </div>
 
+        <MainContainer>
           <MintContainer>
             <DesContainer>
               <NFT elevation={3} style={{ marginTop: "80px" }}>
                 <h2>House Of Anasah</h2>
-                <br />
                 <ImportCard />
                 <div>
                   <Price
@@ -747,7 +775,6 @@ const Home = (props: HomeProps) => {
                     className="homegif"
                   />
                 </div>
-                <br />
                 {wallet &&
                   isActive &&
                   whitelistEnabled &&

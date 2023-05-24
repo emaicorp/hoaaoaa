@@ -13,25 +13,14 @@ export const CTAButton = styled(Button)`
 `; // add your own styles here
 
 export const Card = () => {
-
-
-
   return (
     <div>
       <div className="relative">
-
         <div className="maindiv">
-          <h3 className="info">Pre-Sale: Live</h3>
+          <h1 className="info">Pre-Sale: Live</h1>
         </div>
-        <div >
-
-            </div>
-        </div>
-
-
-
+        <div></div>
       </div>
-      );
+    </div>
+  );
 };
-
-
