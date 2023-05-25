@@ -175,8 +175,6 @@ h3 {
 
 /* Media Query */
 @media (max-width: 1000px) {
-
-
   .animation-section {
     display: none;
   }
@@ -216,13 +214,27 @@ h3 {
   justify-content: space-between;
   box-shadow: 2px 1px 2px 2px rgba(17, 16, 16, 0.836);
   padding: 2rem;
-    background: linear-gradient(45deg, #c99a10, #E91E63, #8bbd17,#0d666d, #826abb,  #0ea112, #FF9800, #757575);
+  background: linear-gradient(
+    45deg,
+    #c99a10,
+    #e91e63,
+    #8bbd17,
+    #0d666d,
+    #826abb,
+    #0ea112,
+    #ff9800,
+    #757575
+  );
   background-size: 200% 100%;
   animation: gradient-animation 6s linear infinite;
-
-
 }
-
+.mint-header-title {
+  align-content: center;
+  display: flex;
+}
+.mint-header-title > img {
+  margin-top: 17px;
+}
 .mint-title {
   font-size: 2rem;
   font-weight: bold;
@@ -257,11 +269,29 @@ h3 {
   cursor: not-allowed;
 }
 
-
-
 .homegif {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
 }
-
+.RoadMap {
+  margin-top: 15px;
+}
+.RoadMap > h1 {
+  font-size: 50px;
+}
+.RoadMap-items {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px 1px rgba(17, 16, 16, 0.836);
+  padding: 15px;
+}
+.RoadMap-items-header {
+  display: flex;
+  justify-content: space-between;
+}
+.RoadMap-items-header > h3 {
+  background-color: black;
+  border-radius: 50px;
+  padding: 15px;
+}

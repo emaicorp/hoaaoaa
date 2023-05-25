@@ -739,17 +739,24 @@ const Home = (props: HomeProps) => {
         </div>
       </div>
       <div className="mint-section">
-
         <div className="mint-header">
-          <h1 className="mint-title">House Of Anasah</h1>
-            <WalletContainer>
-                    <Wallet>
-                        {wallet ?
-                            <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
-                            <ConnectButton>Connect Wallet</ConnectButton>}
-                    </Wallet>
+          <div className="mint-header-title">
+            <img src="logo.png" alt="hoaaoaa logo" width={40} height={40} />
+            <h1 className="mint-title">House Of Anasah</h1>
+          </div>
+          <WalletContainer>
+            <Wallet>
+              {wallet ? (
+                <WalletAmount>
+                  {(balance || 0).toLocaleString()} SOL
+                  <ConnectButton />
+                </WalletAmount>
+              ) : (
+                <ConnectButton>Connect Wallet</ConnectButton>
+              )}
+            </Wallet>
           </WalletContainer>
-      
+        </div>
         <MainContainer>
           <MintContainer>
             <DesContainer>
