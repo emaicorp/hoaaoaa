@@ -33,6 +33,7 @@ import {
 import "./App.css";
 import RoadMap from "./components/RoadMap";
 import Community from "./components/Community";
+import Collection from "./components/Collection";
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS
@@ -916,6 +917,9 @@ const Home = (props: HomeProps) => {
                 </NFT>
               </DesContainer>
             </MintContainer>
+
+            <Collection />
+
             <Community />
             <RoadMap />
           </MainContainer>

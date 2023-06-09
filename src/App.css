@@ -289,6 +289,31 @@ h3 {
   height: 100vh;
   object-fit: cover;
 }
+.collectible,
+.RoadMap {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.collection {
+  width: 200px;
+  font-size: 12px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 15px;
+}
+.collection > img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  height: 200px;
+}
+.collection1 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
 .RoadMap {
   margin-top: 15px;
 }

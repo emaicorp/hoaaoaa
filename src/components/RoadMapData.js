@@ -27,3 +27,41 @@ export const RoadMapDat = [
     isCompleted: true,
   },
 ];
+
+export const Image = [
+  {
+    id: 1,
+    alt: "nft image",
+    img: "./background.jpeg",
+  },
+  {
+    id: 2,
+    alt: "nft image",
+
+    img: "./background.jpeg",
+  },
+  {
+    id: 3,
+    alt: "nft image",
+
+    img: "./background.jpeg",
+  },
+  {
+    id: 4,
+    alt: "nft image",
+
+    img: "./background.jpeg",
+  },
+  /* {
+    id: 5,
+    alt: "nft image",
+
+    img: "./background.jpeg",
+  },
+  {
+    id: 6,
+    alt: "nft image",
+
+    img: "./background.jpeg",
+  },*/
+];
