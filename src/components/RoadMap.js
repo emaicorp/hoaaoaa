@@ -14,23 +14,21 @@ export default function RoadMap() {
 
   let hover = RoadMapDat.map((items) => {
     return (
-      isShown && (
-        <div key={items.id} className="RoadMap-items">
-          <div className="RoadMap-items-header">
-            <h1>{items.header}</h1>
-            {items.isCompleted ? (
-              <h3>Completed</h3>
-            ) : (
-              <h3 style={{ backgroundColor: "#433765" }}>OnGoing</h3>
-            )}
-          </div>
-
-          <ol>
-            <li>{items.decriptin1}</li>
-            <li>{items.decriptin2}</li>
-          </ol>
+      <div key={items.id} className="RoadMap-items">
+        <div className="RoadMap-items-header">
+          <h1>{items.header}</h1>
+          {items.isCompleted ? (
+            <h3>Completed</h3>
+          ) : (
+            <h3 style={{ backgroundColor: "#433765" }}>OnGoing</h3>
+          )}
         </div>
-      )
+
+        <ol>
+          <li>{items.decriptin1}</li>
+          <li>{items.decriptin2}</li>
+        </ol>
+      </div>
     );
   });
 

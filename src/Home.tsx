@@ -32,6 +32,7 @@ import {
 } from "./candy-machine";
 import "./App.css";
 import RoadMap from "./components/RoadMap";
+import Community from "./components/Community";
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS
@@ -721,24 +722,8 @@ const Home = (props: HomeProps) => {
   ]);
 
   return (
-    <div className="container">
-      <div className="animation-section">
-        <div className="animation-content">
-          <h2 className="animation-title">Welcome to HOA Pre SALE NFT Mint </h2>
-          <p className="animation-description">
-            Experience the magic of minting your own NFTs.
-          </p>
-          <div className="animation-box">
-            <div className="animation-circle"></div>
-            <div className="animation-text">
-              <span>Mint Your</span>
-              <span>NFTs</span>
-              <span>NOW</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="mint-section">
+    <div>
+      <nav>
         <div className="mint-header">
           <div className="mint-header-title">
             <img src="logo.png" alt="hoaaoaa logo" width={40} height={40} />
@@ -757,104 +742,139 @@ const Home = (props: HomeProps) => {
             </Wallet>
           </WalletContainer>
         </div>
-        <MainContainer>
-          <MintContainer>
-            <DesContainer>
-              <NFT elevation={3} style={{ marginTop: "80px" }}>
-                <h2>House Of Anasah</h2>
-                <ImportCard />
-                <div>
-                  <Price
-                    label={
-                      isActive && whitelistEnabled && whitelistTokenBalance > 0
-                        ? whitelistPrice + " " + priceLabel
-                        : price + " " + priceLabel
-                    }
-                  />
-                  <Image
-                    src="background.jpeg"
-                    alt="NFT To Mint"
-                    className="homegif"
-                  />
-                </div>
-                {wallet &&
-                  isActive &&
-                  whitelistEnabled &&
-                  whitelistTokenBalance > 0 &&
-                  isBurnToken && (
+      </nav>
+      <div className="container">
+        <div className="animation-section">
+          <div className="animation-content">
+            <h2 className="animation-title">
+              Welcome to HOA Pre SALE NFT Mint{" "}
+            </h2>
+            <p className="animation-description">
+              Experience the magic of minting your own NFTs.
+            </p>
+            <div className="animation-box">
+              <div className="animation-circle"></div>
+              <div className="animation-text">
+                <span>Mint Your</span>
+                <span>NFTs</span>
+                <span>NOW</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mint-section">
+          <MainContainer>
+            <MintContainer>
+              <DesContainer>
+                <NFT elevation={3} style={{ marginTop: "80px" }}>
+                  <h2>House Of Anasah</h2>
+                  <ImportCard />
+                  <div>
+                    <Price
+                      label={
+                        isActive &&
+                        whitelistEnabled &&
+                        whitelistTokenBalance > 0
+                          ? whitelistPrice + " " + priceLabel
+                          : price + " " + priceLabel
+                      }
+                    />
+                    <Image
+                      src="background.jpeg"
+                      alt="NFT To Mint"
+                      className="homegif"
+                    />
+                  </div>
+                  {wallet &&
+                    isActive &&
+                    whitelistEnabled &&
+                    whitelistTokenBalance > 0 &&
+                    isBurnToken && (
+                      <h3>
+                        You own {whitelistTokenBalance} WL mint{" "}
+                        {whitelistTokenBalance > 1 ? "tokens" : "token"}.
+                      </h3>
+                    )}
+                  {wallet &&
+                    isActive &&
+                    whitelistEnabled &&
+                    whitelistTokenBalance > 0 &&
+                    !isBurnToken && (
+                      <h3>You are whitelisted and allowed to mint.</h3>
+                    )}
+                  {wallet &&
+                    isActive &&
+                    endDate &&
+                    Date.now() < endDate.getTime() && (
+                      <Countdown
+                        date={toDate(candyMachine?.state?.endSettings?.number)}
+                        onMount={({ completed }) =>
+                          completed && setIsEnded(true)
+                        }
+                        onComplete={() => {
+                          setIsEnded(true);
+                        }}
+                        renderer={renderEndDateCounter}
+                      />
+                    )}
+                  {wallet && isActive && (
                     <h3>
-                      You own {whitelistTokenBalance} WL mint{" "}
-                      {whitelistTokenBalance > 1 ? "tokens" : "token"}.
+                      TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}
                     </h3>
                   )}
-                {wallet &&
-                  isActive &&
-                  whitelistEnabled &&
-                  whitelistTokenBalance > 0 &&
-                  !isBurnToken && (
-                    <h3>You are whitelisted and allowed to mint.</h3>
-                  )}
-                {wallet &&
-                  isActive &&
-                  endDate &&
-                  Date.now() < endDate.getTime() && (
-                    <Countdown
-                      date={toDate(candyMachine?.state?.endSettings?.number)}
-                      onMount={({ completed }) => completed && setIsEnded(true)}
-                      onComplete={() => {
-                        setIsEnded(true);
-                      }}
-                      renderer={renderEndDateCounter}
+                  {wallet && isActive && (
+                    <BorderLinearProgress
+                      variant="determinate"
+                      value={100 - (itemsRemaining * 100) / itemsAvailable}
                     />
                   )}
-                {wallet && isActive && (
-                  <h3>
-                    TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}
-                  </h3>
-                )}
-                {wallet && isActive && (
-                  <BorderLinearProgress
-                    variant="determinate"
-                    value={100 - (itemsRemaining * 100) / itemsAvailable}
-                  />
-                )}
-                <br />
-                <MintButtonContainer>
-                  {!isActive &&
-                  !isEnded &&
-                  candyMachine?.state.goLiveDate &&
-                  (!isWLOnly || whitelistTokenBalance > 0) ? (
-                    <Countdown
-                      date={toDate(candyMachine?.state.goLiveDate)}
-                      onMount={({ completed }) =>
-                        completed && setIsActive(!isEnded)
-                      }
-                      onComplete={() => {
-                        setIsActive(!isEnded);
-                      }}
-                      renderer={renderGoLiveDateCounter}
-                    />
-                  ) : !wallet ? (
-                    <ConnectButton>Connect Wallet</ConnectButton>
-                  ) : !isWLOnly || whitelistTokenBalance > 0 ? (
-                    candyMachine?.state.gatekeeper &&
-                    wallet.publicKey &&
-                    wallet.signTransaction ? (
-                      <GatewayProvider
-                        wallet={{
-                          publicKey:
-                            wallet.publicKey ||
-                            new PublicKey(CANDY_MACHINE_PROGRAM),
-                          //@ts-ignore
-                          signTransaction: wallet.signTransaction,
-                        }}
-                        gatekeeperNetwork={
-                          candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+                  <br />
+                  <MintButtonContainer>
+                    {!isActive &&
+                    !isEnded &&
+                    candyMachine?.state.goLiveDate &&
+                    (!isWLOnly || whitelistTokenBalance > 0) ? (
+                      <Countdown
+                        date={toDate(candyMachine?.state.goLiveDate)}
+                        onMount={({ completed }) =>
+                          completed && setIsActive(!isEnded)
                         }
-                        clusterUrl={rpcUrl}
-                        cluster={cluster}
-                        options={{ autoShowModal: false }}
-                      >
+                        onComplete={() => {
+                          setIsActive(!isEnded);
+                        }}
+                        renderer={renderGoLiveDateCounter}
+                      />
+                    ) : !wallet ? (
+                      <ConnectButton>Connect Wallet</ConnectButton>
+                    ) : !isWLOnly || whitelistTokenBalance > 0 ? (
+                      candyMachine?.state.gatekeeper &&
+                      wallet.publicKey &&
+                      wallet.signTransaction ? (
+                        <GatewayProvider
+                          wallet={{
+                            publicKey:
+                              wallet.publicKey ||
+                              new PublicKey(CANDY_MACHINE_PROGRAM),
+                            //@ts-ignore
+                            signTransaction: wallet.signTransaction,
+                          }}
+                          gatekeeperNetwork={
+                            candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+                          }
+                          clusterUrl={rpcUrl}
+                          cluster={cluster}
+                          options={{ autoShowModal: false }}
+                        >
+                          <MintButton
+                            candyMachine={candyMachine}
+                            isMinting={isMinting}
+                            isActive={isActive}
+                            isEnded={isEnded}
+                            isSoldOut={isSoldOut}
+                            onMint={onMint}
+                          />
+                        </GatewayProvider>
+                      ) : (
                         <MintButton
                           candyMachine={candyMachine}
                           isMinting={isMinting}
@@ -863,44 +883,36 @@ const Home = (props: HomeProps) => {
                           isSoldOut={isSoldOut}
                           onMint={onMint}
                         />
-                      </GatewayProvider>
+                      )
                     ) : (
-                      <MintButton
-                        candyMachine={candyMachine}
-                        isMinting={isMinting}
-                        isActive={isActive}
-                        isEnded={isEnded}
-                        isSoldOut={isSoldOut}
-                        onMint={onMint}
-                      />
-                    )
-                  ) : (
-                    <h1>Mint is private.</h1>
+                      <h1>Mint is private.</h1>
+                    )}
+                  </MintButtonContainer>
+                  <br />
+                  {wallet && isActive && solanaExplorerLink && (
+                    <SolExplorerLink href={solanaExplorerLink} target="_blank">
+                      View on Solscan
+                    </SolExplorerLink>
                   )}
-                </MintButtonContainer>
-                <br />
-                {wallet && isActive && solanaExplorerLink && (
-                  <SolExplorerLink href={solanaExplorerLink} target="_blank">
-                    View on Solscan
-                  </SolExplorerLink>
-                )}
-              </NFT>
-            </DesContainer>
-          </MintContainer>
-          <RoadMap />
-        </MainContainer>
-        <Snackbar
-          open={alertState.open}
-          autoHideDuration={6000}
-          onClose={() => setAlertState({ ...alertState, open: false })}
-        >
-          <Alert
+                </NFT>
+              </DesContainer>
+            </MintContainer>
+            <Community />
+            <RoadMap />
+          </MainContainer>
+          <Snackbar
+            open={alertState.open}
+            autoHideDuration={6000}
             onClose={() => setAlertState({ ...alertState, open: false })}
-            severity={alertState.severity}
           >
-            {alertState.message}
-          </Alert>
-        </Snackbar>
+            <Alert
+              onClose={() => setAlertState({ ...alertState, open: false })}
+              severity={alertState.severity}
+            >
+              {alertState.message}
+            </Alert>
+          </Snackbar>
+        </div>
       </div>
     </div>
   );
