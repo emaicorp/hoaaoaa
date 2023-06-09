@@ -729,6 +729,25 @@ const Home = (props: HomeProps) => {
             <img src="logo.png" alt="hoaaoaa logo" width={40} height={40} />
             <h1 className="mint-title">House Of Anasah</h1>
           </div>
+          <div>
+            <ul className="nav-link">
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#Roadmap">RoadMap</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">FAQ</a>
+              </li>
+            </ul>
+          </div>
           <WalletContainer>
             <Wallet>
               {wallet ? (

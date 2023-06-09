@@ -6,7 +6,9 @@
   --main-text-color: #f7f6f4;
   --title-text-color: #3cba8b;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   /*  background-color:var(--main-background-color);*/
 
@@ -14,7 +16,20 @@ body {
   font-family: "Patrick Hand", cursive;
   font-size: 1.1em;
 }
-
+.nav-link {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+}
+.nav-link > li > a {
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 2rem;
+  color: white;
+}
+.nav-link > li > a:hover {
+  border-bottom: 5px solid white;
+}
 h2,
 p {
   color: var(--main-text-color);
